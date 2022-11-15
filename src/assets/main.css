@@ -6,3 +6,8 @@
   padding: 0rem;
   font-weight: normal;
 }
+:root{
+  --van-button-border-radius:6px;
+  --van-button-primary-background-color: #3c7ef6;
+}
+  
