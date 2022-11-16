@@ -10,4 +10,7 @@
   --van-button-border-radius:6px;
   --van-button-primary-background-color: #3c7ef6;
 }
-  
+
+.bottom-fixed{
+  @apply fixed bottom-0 left-0 w-full px-4 py-3 bg-white border-t border-gray-100;
+}

@@ -17,20 +17,30 @@
                    :border="false"
                    class="input" />
         <van-field v-model="password"
-                   type="password"
+                   :type="passwordType"
                    name=""
                    label=""
                    placeholder="请输入您的密码"
                    :border="false"
                    right-icon="eye"
-                   class="input mt-3" />
+                   class="input mt-3">
+          <template #right-icon>
+            <i class="iconfont icon-eye-fill"
+               @click="toggle('text')"
+               v-if="passwordType=='password'"></i>
+            <i class="iconfont icon-eyeslash-fill"
+               @click="toggle('password')"
+               v-else></i>
+          </template>
+        </van-field>
       </van-cell-group>
       <div class="text-right mt-4 text-gray-500">忘记密码？</div>
       <div class="mt-4">
         <van-button block
                     type="primary"
                     class="rounded-md"
-                    native-type="submit">
+                    native-type="submit"
+                    :loading="loginLoading">
           提交
         </van-button>
       </div>
@@ -40,21 +50,50 @@
 <script setup>
 import { ref } from "vue";
 import { Toast } from "vant";
-const phone = ref("");
-const password = ref("");
-const onSubmit = (val) => {
-	console.log("onSubmit",val,phone.value,password);
+import * as Api from "@/api/login.js";
+import { useRouter } from "vue-router";
+const phone = ref("18780170404");
+const loginLoading = ref(false);
+const password = ref("zxc123..");
+const passwordType = ref("password");
+const router = useRouter();
 
-	console.log('phone.value',!phone.value);
-	Toast.fail("请输入登录名");
-	// if(!phone.value){
-	// 	Toast("请输入登录名");
-	// 	return false;
-	// }
-	// if(!password.value){
-	// 	Toast("请输入登录密码");
-	// 	return false;
-	// }
+
+const onSubmit = async (val) => {
+  console.log("onSubmit", val, phone.value, password);
+
+  console.log('phone.value', !phone.value);
+  if (!phone.value) {
+    Toast("请输入登录名");
+    return false;
+  }
+  if (!password.value) {
+    Toast("请输入登录密码");
+    return false;
+  }
+  let params = {
+    phone: phone.value,
+    password: password.value,
+    original_password: password.value
+  }
+  try {
+    loginLoading.value = true;
+    let res = await Api.login(params);
+    console.log('res', res);
+    if (res.list.length > 1) {  //需要切换角色
+      router.push(`/rolelist?token=${res.data.token}`)
+    } else {
+
+    }
+  } catch (e) {
+    console.log('e', e);
+  } finally {
+    loginLoading.value = false;
+  }
+
+}
+const toggle = (val) => {
+  passwordType.value = val;
 }
 
 </script>

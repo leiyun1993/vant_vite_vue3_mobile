@@ -7,29 +7,49 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component:TabBar,
-      children:[
+      component: TabBar,
+      children: [
         {
-          path:"/index",
-          name:"Index",
-          component: () => import('@/views/index/index.vue')
+          path: "/index",
+          name: "Index",
+          component: () => import('@/views/index/index.vue'),
+          meta: {
+            title: "家校互通"
+          }
         },
         {
-          path:"/moment",
-          name:"Moment",
-          component: () => import('@/views/moment/index.vue')
+          path: "/moment",
+          name: "Moment",
+          component: () => import('@/views/moment/index.vue'),
+          meta: {
+            title: "动态"
+          }
         },
         {
-          path:"/my",
-          name:"My",
-          component: () => import('@/views/my/index.vue')
+          path: "/my",
+          name: "My",
+          component: () => import('@/views/my/index.vue'),
+          meta: {
+            title: "我的"
+          }
         }
       ]
     },
     {
       path: '/login',
       name: 'Login',
-      component: () => import('@/views/login/index.vue')
+      component: () => import('@/views/login/index.vue'),
+      meta:{
+        title:"登录"
+      }
+    },
+    {
+      path: '/rolelist',
+      name: 'RoleList',
+      component: () => import('@/views/login/rolelist.vue'),
+      meta:{
+        title:"身份切换"
+      }
     }
   ]
 })

@@ -4,6 +4,8 @@ import vant from "vant"
 import App from './App.vue'
 import router from './router'
 import { ConfigProvider } from 'vant';
+import "@/router/control";
+
 
 import './assets/tailwind.css';
 import 'vant/lib/index.css';
