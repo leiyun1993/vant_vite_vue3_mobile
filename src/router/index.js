@@ -8,6 +8,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: TabBar,
+      redirect: "/index",
       children: [
         {
           path: "/index",
@@ -39,16 +40,16 @@ const router = createRouter({
       path: '/login',
       name: 'Login',
       component: () => import('@/views/login/index.vue'),
-      meta:{
-        title:"登录"
+      meta: {
+        title: "登录"
       }
     },
     {
       path: '/rolelist',
       name: 'RoleList',
       component: () => import('@/views/login/rolelist.vue'),
-      meta:{
-        title:"身份切换"
+      meta: {
+        title: "身份切换"
       }
     }
   ]

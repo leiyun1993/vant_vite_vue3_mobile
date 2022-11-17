@@ -31,6 +31,7 @@
 </template>
 <script setup>
 import * as Api from "@/api/login.js";
+import * as rightApi from "@/api/rights.js";
 import { Toast } from "vant";
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -77,6 +78,9 @@ const onSubmitClick = async () => {
     let userRes = await Api.getUserLoginInfo({ token: res.data.token });
     userStore.userInfo = userRes.data;
     localStorage.userInfo = JSON.stringify(userRes.data);
+		let unitRes = await rightApi.getUnitInfo({ unit_id: res.data.school_id });
+    userStore.unitInfo = unitRes.data;
+    localStorage.unitInfo = JSON.stringify(unitRes.data);
     router.push("/index")
   } catch (e) {
     console.log('e', e);

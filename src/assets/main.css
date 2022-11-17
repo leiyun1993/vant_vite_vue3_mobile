@@ -14,3 +14,8 @@
 .bottom-fixed{
   @apply fixed bottom-0 left-0 w-full px-4 py-3 bg-white border-t border-gray-100;
 }
+
+.grid-shadow{
+  background-color: #fff;
+  box-shadow: 0 5px 15px 0 rgb(0 19 51 / 10%);
+}

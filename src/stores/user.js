@@ -14,13 +14,18 @@ export const useCounterStore = defineStore('counter', () => {
 
 export const useUserStore = defineStore("userInfo", () => {
   const userInfo = ref({});
+  const unitInfo = ref({});
   const userJson = JSON.parse(localStorage.getItem("userInfo"));
-  console.log('userJson', userJson);
+  const unitJson = JSON.parse(localStorage.getItem("unitInfo"));
   if (userJson) {
     userJson.className = `${userJson.grade_name}${userJson.class_name}`
     userInfo.value = userJson;
   }
+  if (unitJson) {
+    unitInfo.value = unitJson;
+  }
   return {
-    userInfo: userInfo
+    userInfo: userInfo,
+    unitInfo: unitInfo,
   }
 })
